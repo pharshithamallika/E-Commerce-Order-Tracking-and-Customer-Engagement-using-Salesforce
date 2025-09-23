@@ -49,8 +49,8 @@ AppExchange Exploration:
 
   There are existing Salesforce solutions for retail and e-commerce (e.g., Commerce Cloud, Marketing Cloud, Service Cloud integrations). For learning purposes, we will build a simplified custom CRM with objects     for:
 
-  Orders
-  Order Items
-  Customers
-  Notifications
+  Orders,
+  Order Items,
+  Customers,
+  Notifications,
   Feedback & Engagement
