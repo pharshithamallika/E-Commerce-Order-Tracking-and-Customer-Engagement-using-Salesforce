@@ -122,6 +122,7 @@ Use Case Explanations
  9. External Objects
       Configured External Object for Payment Gateway Integration (e.g., PayPal / Razorpay transaction history).
       Fields: Transaction_ID__x, Payment_Status__x, Payment_Date__x.
+
 Phase 4: Process Automation (Admin)
  1. Validation Rules
      Use Case: Ensure order data is valid before saving.
@@ -151,5 +152,45 @@ Phase 4: Process Automation (Admin)
      Use Case: Create a follow-up task for support agent if a customer raises a complaint (Case record).
  9. Custom Notifications
      Use Case: Send a push notification to sales managers when high-value orders (> ₹1,00,000) are placed.
+
+Phase 5: Apex Programming (Developer)
+ 1. Classes & Objects
+     Created helper classes to handle reusable business logic (e.g., updating order status, processing shipments).
+     Helps keep the project modular and easier to maintain.
+ 2. Apex Triggers (before/after insert/update/delete)
+     Implemented triggers on the Order object to auto-create Shipment records when an order is placed.
+     Triggers also update engagement records when order status changes to Delivered.
+ 3. Trigger Design Pattern
+     Used Trigger Handler approach to separate logic from triggers.
+     This ensures scalability and avoids writing bulky triggers.
+ 4. SOQL & SOSL
+     SOQL was used to fetch order, shipment, and engagement data for reports.
+     SOSL was used for searching customers by name, email, or phone.
+ 5. Collections: List, Set, Map
+     List used for handling multiple shipment records at once.
+     Set used to ensure unique tracking IDs.
+     Map used to relate orders with their shipments.
+6. Control Statements
+     Implemented if/else, for loops, and switch cases to manage order lifecycle conditions (Pending, Shipped, Delivered, Cancelled).
+7. Batch Apex
+     Used to archive old orders (e.g., older than one year).
+     Ensures large volumes of data can be processed in batches.
+8. Queueable Apex
+     Implemented to process bulk customer feedback asynchronously, without impacting system performance.
+9. Scheduled Apex
+     Used to send daily order summary reports to managers at a scheduled time (9 AM).
+10. Future Methods
+     Implemented to perform external API callouts (e.g., fetching real-time courier tracking updates).
+11. Exception Handling
+     Standardized error handling to ensure that invalid data or system failures are logged and do not interrupt processes.
+12. Test Classes
+     Created test classes to achieve 75%+ test coverage, ensuring all triggers, classes, and methods work correctly before deployment.
+13. Asynchronous Processing
+     Implemented a mix of Batch Apex, Queueable Apex, Scheduled Apex, and Future Methods to handle:
+     Bulk data processing (orders, shipments).
+     Real-time customer engagement.
+     Automated daily reporting.
+     Third-party integrations (e.g., payment gateways, courier tracking).    
+    
 
 
