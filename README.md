@@ -85,3 +85,71 @@ Use Case Explanations
   Business Hours & Holidays → Ensures customers receive accurate delivery timelines.
   Sandbox Usage → Prevents disruptions to live customer orders while testing.
 
+ Phase 3: Data Modeling & Relationships
+  1. Standard & Custom Objects
+     Standard Objects Used:
+      Account – represents customers (buyers).
+      Contact – customer details (name, email, phone).
+      Order – standard Salesforce object for order management.
+      Case – for order issues or complaints.
+   Custom Objects Created:
+      Product__c – stores e-commerce product catalog.
+      Shipment__c – tracks delivery/shipping details.
+      Engagement__c – stores customer engagement activities like feedback, loyalty points, offers.
+ 2. Fields
+    Custom Fields Added:
+      On Order → Order_Status__c (Picklist: Pending, Shipped, Delivered, Cancelled)
+      On Shipment__c → Tracking_ID__c (Text), Delivery_Date__c (Date)
+      On Engagement__c → Reward_Points__c (Number), Feedback__c (Long Text Area)
+ 3. Record Types
+    Order Object Record Types:
+      B2C Order – for individual customers.
+      B2B Order – for wholesale / bulk orders.
+ 4. Page Layouts
+      Designed Order Layout with fields like Product, Quantity, Status, Payment Mode.
+      Shipment Layout includes Tracking ID, Courier Partner, Delivery Date.
+ 5. Compact Layouts
+      Order Compact Layout: Shows Order Number, Status, Amount.
+      Shipment Compact Layout: Shows Tracking ID, Delivery Date, Status.
+ 6. Schema Builder
+      Used Schema Builder to visualize relationships between Account → Order → Shipment and Account → Engagement.
+ 7. Lookup vs Master-Detail vs Hierarchical Relationships
+      Lookup Relationship: Order → Shipment (each order can have multiple shipments).
+      Master-Detail Relationship: Order → Engagement (engagement records depend on order).
+      Hierarchical Relationship: Used in User object for Manager–Agent hierarchy.
+ 8. Junction Objects
+      Created OrderProduct__c (junction between Order and Product) to allow many products in a single order.
+ 9. External Objects
+      Configured External Object for Payment Gateway Integration (e.g., PayPal / Razorpay transaction history).
+      Fields: Transaction_ID__x, Payment_Status__x, Payment_Date__x.
+Phase 4: Process Automation (Admin)
+ 1. Validation Rules
+     Use Case: Ensure order data is valid before saving.
+     Example: Prevent saving an order if Quantity < 1.
+     Formula: Quantity__c < 1 → Error: “Quantity must be at least 1.”
+ 2. Workflow Rules
+     Use Case: Auto-send an email when an order status changes to Shipped.
+     Action: Email alert to the customer with tracking details.
+ 3. Process Builder
+     Use Case: When an order is created, automatically create a related shipment record.
+    Example: Order → Creates Shipment__c with default “Pending Dispatch” status.
+ 4. Approval Process
+     Use Case: Bulk orders (> ₹50,000) require manager approval before processing.
+     Steps:
+      Sales Agent submits order for approval.
+      Manager approves/rejects.
+ 5. Flow Builder
+     Screen Flow → For customers entering feedback after delivery.
+     Record-Triggered Flow → Auto-update shipment status when delivery date is reached.
+     Scheduled Flow → Send reminder emails for pending payments every 3 days.
+     Auto-launched Flow → Award loyalty points once order status = Delivered.
+ 6. Email Alerts
+     Use Case: Send delivery confirmation email when order status changes to Delivered.
+ 7. Field Updates
+     Use Case: Update Customer_Status__c field to “Active” when first order is placed.
+ 8. Tasks
+     Use Case: Create a follow-up task for support agent if a customer raises a complaint (Case record).
+ 9. Custom Notifications
+     Use Case: Send a push notification to sales managers when high-value orders (> ₹1,00,000) are placed.
+
+
