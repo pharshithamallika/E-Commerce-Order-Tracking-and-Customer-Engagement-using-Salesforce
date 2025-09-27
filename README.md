@@ -1,4 +1,9 @@
 # E-Commerce-Order-Tracking-and-Customer-Engagement-using-Salesforce
+Problem Statement
+
+E-commerce businesses often face challenges in providing real-time order tracking and maintaining customer engagement after purchases. Customers experience delayed updates, scattered communication, and lack of personalized interaction, leading to dissatisfaction and low retention.
+A Salesforce-based solution is needed to centralize order tracking, automate shipment updates, and improve customer engagement through timely notifications, feedback collection, and loyalty programs, ensuring a seamless and trusted shopping experience.
+
 Phase 1: Problem Understanding & Industry Analysis Goal
 
 To understand the challenges e-commerce businesses face in tracking customer orders, managing delivery updates, and engaging customers before and after purchase, and how a CRM like Salesforce can make these processes seamless, transparent, and customer-focused.
